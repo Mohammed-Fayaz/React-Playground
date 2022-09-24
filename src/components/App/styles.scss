@@ -1,3 +1,7 @@
-.first-name {
-    @apply mr-2;
+:root {
+    @apply m-1;
+}
+
+.name {
+    @apply text-3xl ml-1;
 }

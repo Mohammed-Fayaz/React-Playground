@@ -36,7 +36,7 @@ export class UserControllerApi extends runtime.BaseAPI {
 
     /**
      */
-    async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<void>> {
+    async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<Array<User>>> {
         if (requestParameters.firstName === null || requestParameters.firstName === undefined) {
             throw new runtime.RequiredError('firstName','Required parameter requestParameters.firstName was null or undefined when calling addUser.');
         }
@@ -64,18 +64,19 @@ export class UserControllerApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserFromJSON));
     }
 
     /**
      */
-    async addUser(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<void> {
-        await this.addUserRaw(requestParameters, initOverrides);
+    async addUser(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<Array<User>> {
+        const response = await this.addUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
      */
-    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<void>> {
+    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<Array<User>>> {
         if (requestParameters.firstName === null || requestParameters.firstName === undefined) {
             throw new runtime.RequiredError('firstName','Required parameter requestParameters.firstName was null or undefined when calling deleteUser.');
         }
@@ -95,13 +96,14 @@ export class UserControllerApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserFromJSON));
     }
 
     /**
      */
-    async deleteUser(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<void> {
-        await this.deleteUserRaw(requestParameters, initOverrides);
+    async deleteUser(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<Array<User>> {
+        const response = await this.deleteUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
