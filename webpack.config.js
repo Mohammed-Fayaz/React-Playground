@@ -66,11 +66,7 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.s[ac]ss$/i,
+                test: /\.s?css$/i,
                 use: [
                     // Creates `style` nodes from JS strings
                     'style-loader',
@@ -78,6 +74,7 @@ module.exports = {
                     { loader: 'css-loader', options: { modules: true } },
                     // Compiles Sass to CSS
                     'sass-loader',
+                    'postcss-loader',
                 ],
             },
         ],
@@ -87,7 +84,7 @@ module.exports = {
             tsconfigPath: path.resolve(ROOT_DIR, 'tsconfig.json'),
             webpackConfigBasePath: path.resolve(ROOT_DIR),
         }),
-        extensions: ['.tsx', '.ts', '.js', '.scss', '.css'],
+        extensions: ['.tsx', '.ts', '.js', '.scss', '.css', '.jsx'],
 
         // fallback: {
         //     https: false,

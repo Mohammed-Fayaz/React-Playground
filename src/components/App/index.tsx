@@ -4,6 +4,9 @@ import { User } from 'generated-sources/openapi';
 // clients
 import { UserControllerService } from 'services/UserClient';
 
+// styles
+// import style from './styles.scss';
+
 const App = () => {
     const [users, setUsers] = useState<Array<User> | null>(null);
     const abortControllerRef = useRef<AbortController>();
