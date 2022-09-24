@@ -11,7 +11,9 @@
         "checkJs": true,
         "baseUrl": "./src",
         "paths": {
-            "shared": ["./shared"]
+            "shared": ["./shared"],
+            "services": ["./services"],
+            "generated-sources": ["./generated-sources"]
         },
         "esModuleInterop": true,
         "skipLibCheck": true,
